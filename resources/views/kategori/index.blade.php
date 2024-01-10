@@ -1,5 +1,5 @@
 <!doctype html>
-    <html lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -30,6 +30,32 @@
             </ul>
         </div>
     </nav>
-    CRUD ada di navbar
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Deskripsi</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($data as $item)
+        <tr>
+            <th scope="row">{{$item->id}}</th>
+            <td>{{$item->deskripsi}}</td>
+            <td>{{$item->kategori}}</td>
+            <td><a href="/kategori/{{$item->id}}">Show</a> <a href="/kategori/{{$item->id}}/edit">Edit</a>
+                <form action={{route('kategori.destroy', $item->id)}} method='POST'>
+                    @csrf
+                    @method('delete')
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <a href="/kategori/create">Tambah Data</a>
 </body>
 </html>
